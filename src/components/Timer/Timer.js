@@ -39,7 +39,7 @@ class Timer extends React.Component {
         this.nowMinutes = Math.floor((rizn % (1000 * 60 * 60)) / (1000 * 60));
         this.nowSeconds = Math.floor((rizn % (1000 * 60)) / 1000);
 
-
+        clearInterval(this.timerID);
         let step = Number(this.props.step);
         this.timerID = setInterval(
           () => { this.tick() },
