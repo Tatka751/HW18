@@ -4,7 +4,7 @@ import styles from "./Timer.module.css";
 class Timer extends React.Component {
   constructor(props) {
     super(props);
-    this.hours = '00';
+    this.hours = '0';
     this.minutes = '0';
     this.seconds = '0';
     this.userInputTime = this.props.userTime;
@@ -49,7 +49,15 @@ class Timer extends React.Component {
       }
     }
     if (rizn <= 0) {
+      this.hours = 0;
+      this.minutes = 0;
+      this.seconds = 0;
       clearInterval(this.timerID);
+      this.timerID = setTimeout(
+        () => { this.tick() },
+        100
+
+      );
       console.log("Час вийшов!");
     }
   }
