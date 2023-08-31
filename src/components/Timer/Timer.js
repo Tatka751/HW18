@@ -28,6 +28,7 @@ class Timer extends React.Component {
     let rizn = needTime - nowTime;
     if (rizn > 0) {
       if (this.props.autostart === true) {
+
         this.hours = Math.floor((rizn % (1000 * 60 * 60 * 60)) / (1000 * 60 * 60));
         this.minutes = Math.floor((rizn % (1000 * 60 * 60)) / (1000 * 60));
         this.seconds = Math.floor((rizn % (1000 * 60)) / 1000);
@@ -41,29 +42,43 @@ class Timer extends React.Component {
 
         clearInterval(this.timerID);
         let step = Number(this.props.step);
+
         this.timerID = setInterval(
-          () => { this.tick() },
+          () => { this.tick(); },
           step
 
+
         );
+
+
+        if (rizn <= step) {
+          this.hours = 0;
+          this.minutes = 0;
+          this.seconds = 0;
+          clearInterval(this.timerID);
+          this.timerID = setInterval(
+            () => { this.tick(); },
+            step);
+
+          //this.props.autostart = false;
+
+          alert(`Час вийшов`);
+        }
+
+
+
+
+
+
       }
     }
-    if (rizn <= 0) {
-      this.hours = 0;
-      this.minutes = 0;
-      this.seconds = 0;
-      clearInterval(this.timerID);
-      this.timerID = setTimeout(
-        () => { this.tick() },
-        100
 
-      );
-      console.log("Час вийшов!");
-    }
+
   }
 
 
   componentWillUnmount() {
+
     clearInterval(this.timerID);
   }
 

@@ -22,8 +22,8 @@ class GetTime extends React.Component {
             type="datetime-local"
             step="1"
             value={this.state.time}
-            min="2023-08-23T00:00"
-            max="2023-08-30T00:00"
+            min="2023-08-31T00:00"
+            max="2023-09-31T00:00"
             onChange={(e) => {
               this.setState({ time: e.target.value });
             }}
